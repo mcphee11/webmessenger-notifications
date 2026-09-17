@@ -54,12 +54,14 @@ The magic happens in this snippet If you would preffer to just add this to an ex
         console.log(o)
         try {
             if (sessionStorage.getItem('gc_widget') === 'false' && o.data.messages[0].direction === 'Outbound') {
-                var notification = new Notification("New Message", {tag: "genesys", body: o.data.messages[0].text, icon: "https://dhqbrvplips7x.cloudfront.net/contact-center/5000-5000/img/favicon.ico" });
+                const time = new Date().getTime().toString()
+                new Notification("New Message", {tag: `genesys_${time}`, body: o.data.messages[0].text, icon: "https://dhqbrvplips7x.cloudfront.net/contact-center/5000-5000/img/favicon.ico" });
                 Genesys("command", "Messenger.open")
                 return
             }
             if(document.hasFocus() === false){
-                var notification = new Notification("New Message", {tag: "genesys",  body: o.data.messages[0].text, icon: "https://dhqbrvplips7x.cloudfront.net/contact-center/5000-5000/img/favicon.ico" });
+                const time = new Date().getTime().toString()
+                new Notification("New Message", {tag: `genesys_${time}`,  body: o.data.messages[0].text, icon: "https://dhqbrvplips7x.cloudfront.net/contact-center/5000-5000/img/favicon.ico" });
                 Genesys("command", "Messenger.open")
             }
         } catch (err) {
